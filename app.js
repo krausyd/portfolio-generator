@@ -15,17 +15,46 @@ const promptUser = () => {
         {
             type: 'input',
             name: 'name',
-            message: 'What is your name?'
+            message: 'What is your name?',
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log('Please enter your name!');
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'github',
-            message: 'Enter your GitHub Username'
+            message: 'Enter your GitHub Username',
+            validate: githubInput => {
+                if (githubInput) {
+                    return true;
+                } else {
+                    console.log('Please enter your GitHub Username!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'confirm',
+            name: 'confirmAbout',
+            message: 'Would you like to enter some information aobut yourself for an "About" section?',
+            default: true
         },
         {
             type: 'input',
             name: 'about',
-            message: 'Provide some information about yourself'
+            message: 'Provide some information about yourself',
+            when: ({ confirmAbout }) => {
+                if (confirmAbout) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
     ]);
 };
@@ -45,18 +74,47 @@ Add a New Project
         {
             type: 'input',
             name: 'name',
-            message: 'What is the name of your Project?'
+            message: 'What is the name of your Project?',
+            validate: projectNameInput => {
+                if (projectNameInput) {
+                    return true;
+                } else {
+                    console.log('Please enter the Project name!');
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'description',
-            message: 'Provide a description of the project (Required)'
+            message: 'Provide a description of the project (Required)',
+            validate: projectDescriptionInput => {
+                if (projectDescriptionInput) {
+                    return true;
+                } else {
+                    console.log('Please enter the Project description!');
+                    return false;
+                }
+            }
         },
         {
             type: 'checkbox',
             name: 'languages',
             message: 'What did you build this project with? (Check all that apply)',
             choices: ['Javascript', 'HTML', 'CSS', 'ES6', 'JQuery', 'Bootstrap', 'NodeJs']
+        },
+        {
+            type: 'input',
+            name: 'link',
+            message: 'Enter the GitHub link to your project. (Required)',
+            validate: projectGitHubInput => {
+                if (projectGitHubInput) {
+                    return true;
+                } else {
+                    console.log('Please enter the Project GitHub link!');
+                    return false;
+                }
+            }
         },
         {
             type: 'confirm',
